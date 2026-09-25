@@ -2,14 +2,14 @@
 
 <p align="center">
   <a href="https://engob.github.io/planning-classe/"><img alt="Essayer" src="https://img.shields.io/badge/Essayer-Voir_la_d%C3%A9mo-0b0b0f?style=for-the-badge&labelColor=0b0b0f"></a>
-  <a href="https://engob.github.io/portofolio/projets/planning-classe/"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-Senshi_Kabai-4f46e5?style=for-the-badge&labelColor=0b0b0f"></a>
+  <a href="https://www.senshicore.com/projets/planning-classe/"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-Senshi_Kabai-4f46e5?style=for-the-badge&labelColor=0b0b0f"></a>
 </p>
 
 <h1 align="center">Planning de classe</h1>
 <p align="center"><b>L'emploi du temps qui sait combien de temps il reste avant la sonnerie.</b><br>Un emploi du temps vivant pour élèves, parents et enseignants : le cours en cours, le suivant, le temps restant, les semaines A/B et les changements du jour.</p>
 <p align="center"><sub>Statut : <b>En ligne</b></sub></p>
 
-> **Pensé pour le téléphone.** C'est une application web installable (PWA) : ouvrez la démo sur votre mobile pour la voir telle qu'elle a été conçue. Sur un ordinateur, l'affichage n'est pas celui prévu ; la [fiche du portfolio](https://engob.github.io/portofolio/projets/planning-classe/) l'ouvre dans un cadre de téléphone, avec un QR code pour passer sur mobile.
+> **Pensé pour le téléphone.** C'est une application web installable (PWA) : ouvrez la démo sur votre mobile pour la voir telle qu'elle a été conçue. Sur un ordinateur, l'affichage n'est pas celui prévu ; la [fiche du portfolio](https://www.senshicore.com/projets/planning-classe/) l'ouvre dans un cadre de téléphone, avec un QR code pour passer sur mobile.
 
 ---
 
@@ -43,7 +43,7 @@ A/B weeks, groups, changing rooms, cancelled classes: paper timetables can't kee
 
 ---
 
-<p align="center"><sub>Conçu, développé et mis en ligne par <b>Senshi Kabai</b>, Product Builder · <a href="https://engob.github.io/portofolio/">portfolio</a> · <a href="https://engob.github.io/portofolio/projets/planning-classe/">fiche du projet</a><br>© 2026 Senshi Kabai — tous droits réservés.</sub></p>
+<p align="center"><sub>Conçu, développé et mis en ligne par <b>Senshi Kabai</b>, Product Builder · <a href="https://www.senshicore.com/">portfolio</a> · <a href="https://www.senshicore.com/projets/planning-classe/">fiche du projet</a><br>© 2026 Senshi Kabai — tous droits réservés.</sub></p>
 
 
 <details>
@@ -85,6 +85,6 @@ navigateur et n'est jamais publié.
 
 ---
 
-Conçu et développé par [Senshi Kabai](https://engob.github.io/portofolio/) — tous droits réservés.
+Conçu et développé par [Senshi Kabai](https://www.senshicore.com/) — tous droits réservés.
 
 </details>
