@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b1014" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="EDT 1ST2S1">
+<meta name="apple-mobile-web-app-title" content="EDT 3e B">
 <title>Emploi du temps</title>
 <style>
 :root{
@@ -601,7 +601,7 @@ body.edit .addbtn{display:inline-block}
 <div class="wrap">
 
   <header class="top">
-    <h1>Emploi du temps <span class="cl" id="titrePlanning">1ST2S1</span></h1>
+    <h1>Emploi du temps <span class="cl" id="titrePlanning">3e B</span></h1>
     <p class="sub" id="meta"></p>
   </header>
 
@@ -723,7 +723,7 @@ body.edit .addbtn{display:inline-block}
   "use strict";
 
   var PLANNINGS = [
-    { id: "1st2s1", nom: "1ST2S1", variable: "EDT_DATA", fichier: "data.js", cle: "edt-1st2s1-v3" },
+    { id: "1st2s1", nom: "3e B", variable: "EDT_DATA", fichier: "data.js", cle: "edt-1st2s1-v3" },
     { id: "cm1", nom: "CM1", variable: "EDT_DATA_CM1", fichier: "data-cm1.js", cle: "edt-cm1-v1" }
   ];
   var KEY_PLANNING = "edt-planning";
@@ -2094,7 +2094,7 @@ body.edit .addbtn{display:inline-block}
 
   /* ---------- fichier de sortie ---------- */
   function fichierSortie() {
-    var head = "/* Emploi du temps 1ST2S1 — données\n" +
+    var head = "/* Emploi du temps 3e B — données\n" +
       "   Fichier régénéré depuis la page. Remplacez data.js dans le dépôt pour publier.\n" +
       "   Case vide : null · case occupée par le cours du dessus : \"SUITE\"\n" +
       "   { m, p, s, c, span, n } ou { gr: true, span, A: …, B: … } */\n\n";
@@ -2176,7 +2176,7 @@ body.edit .addbtn{display:inline-block}
       if (r.ok) sha = (await r.json()).sha;
       else if (r.status !== 404) throw new Error("Lecture du fichier : " + r.status + " " + r.statusText);
       var f = fichierSortie();
-      var corps = { message: "Emploi du temps 1ST2S1 — mise à jour depuis la page", content: b64(f.texte), branch: branche };
+      var corps = { message: "Emploi du temps 3e B — mise à jour depuis la page", content: b64(f.texte), branch: branche };
       if (sha) corps.sha = sha;
       var r2 = await fetch(url, { method: "PUT", headers: entetes, body: JSON.stringify(corps) });
       if (!r2.ok) {

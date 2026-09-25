@@ -1,4 +1,4 @@
-/* Emploi du temps 1re ST2S (démonstration) — données
+/* Emploi du temps 3e B (démonstration) — données
    Ce fichier est le seul endroit à modifier pour corriger le contenu.
    Le bouton « Enregistrer » de la page régénère ce fichier : il suffit de le
    remplacer dans le dépôt pour publier les corrections.
@@ -13,14 +13,21 @@
 
    m = matière · p = professeur · s = salle · c = famille (couleur)
    span = nombre de créneaux occupés · n = note libre
-   Familles : stss, bph, sciences, maths, lettres, hg, langues, eps, accomp
+   Familles : lettres, maths, hg, langues, bph (SVT), sciences (physique-chimie), stss (technologie), arts, eps, accomp
 */
 
 window.EDT_DATA = {
+  // Noms des familles de couleurs affichés dans la légende et l'éditeur
+  familles: {
+    lettres: "Français", maths: "Mathématiques", hg: "Histoire-géo & EMC", langues: "Langues vivantes",
+    bph: "SVT", sciences: "Physique-chimie", stss: "Technologie", arts: "Arts & musique",
+    eps: "EPS", accomp: "Accompagnement & vie de classe"
+  },
+
   meta: {
-    etablissement: "Lycée des Tilleuls — démo",
-    classe: "1ST2S1",
-    profPrincipal: "Mme MOREL",
+    etablissement: "Collège des Petits Génies — démo",
+    classe: "3e B",
+    profPrincipal: "M. PYTHAGORE",
     groupe: "Groupe A",
     maj: "Rentrée 2026"
   },
@@ -63,11 +70,11 @@ window.EDT_DATA = {
 
   // Affaires à prévoir, par matière. Modifiable depuis le bouton « Affaires ».
   affaires: {
-    "EPS": ["Tenue de sport", "Baskets propres"],
-    "Bio. physiopatho. hum.": ["Blouse"],
-    "TP Physique-chimie": ["Blouse", "Lunettes de protection"],
-    "Mathématiques": ["Calculatrice"],
-    "Devoir surveillé": ["Copies doubles"]
+    "EPS": ["Tenue de sport", "Baskets propres", "Gourde"],
+    "TP Physique-chimie": ["Blouse en coton"],
+    "Mathématiques": ["Calculatrice", "Équerre et compas"],
+    "Arts plastiques": ["Tablier ou vieux t-shirt"],
+    "Devoir surveillé": ["Copies doubles", "Stylo qui marche"]
   },
 
   // Changements ponctuels, par date : { slot, type: "annule" | "remplace" | "ajout", … }
@@ -75,174 +82,212 @@ window.EDT_DATA = {
 
   recap: [
     {
-      titre: "Enseignements",
-      lignes: [
-        { m: "Bio. physiopathologie humaine", p: "M. Garnier", h: 7, c: "bph" },
-        { m: "STSS", p: "Mme Lefèvre", h: 6, c: "stss" },
-        { m: "STSS", p: "Mme Perrin", h: 5, c: "stss" },
-        { m: "Physique-chimie", p: "M. Fontaine", h: 4, c: "sciences" },
-        { m: "Mathématiques", p: "Mme Morel", h: 4, c: "maths" },
-        { m: "Français", p: "Mme Roux", h: 4, c: "lettres" },
-        { m: "EPS", p: "M. Lambert", h: 2, c: "eps" },
-        { m: "Histoire-géographie", p: "M. Mercier", h: 1.5, c: "hg" },
-        { m: "Enseignement moral et civique", p: "M. Mercier", h: 0.5, c: "hg" }
+      "titre": "Enseignements",
+      "lignes": [
+        {
+          "m": "Français",
+          "p": "Mme Bescherelle",
+          "h": 4.5,
+          "c": "lettres"
+        },
+        {
+          "m": "Mathématiques",
+          "p": "M. Pythagore",
+          "h": 5,
+          "c": "maths"
+        },
+        {
+          "m": "Histoire-géographie",
+          "p": "M. Vercingétorix",
+          "h": 3,
+          "c": "hg"
+        },
+        {
+          "m": "Enseignement moral et civique",
+          "p": "M. Vercingétorix",
+          "h": 0.5,
+          "c": "hg"
+        },
+        {
+          "m": "SVT",
+          "p": "Mme Darwin",
+          "h": 1.5,
+          "c": "bph"
+        },
+        {
+          "m": "Physique-chimie",
+          "p": "M. Bunsen",
+          "h": 1.5,
+          "c": "sciences"
+        },
+        {
+          "m": "Technologie",
+          "p": "M. Gadget",
+          "h": 1.5,
+          "c": "stss"
+        },
+        {
+          "m": "EPS",
+          "p": "M. Sprint",
+          "h": 3,
+          "c": "eps"
+        }
       ],
-      note: "Volumes de la classe entière : STSS, biologie et physique-chimie se partagent entre les deux groupes."
+      "note": "SVT, technologie et TP de physique-chimie se font en demi-groupes (A et B)."
     },
     {
-      titre: "Langues vivantes",
-      note: "ETLV : un seul des quatre groupes vous concerne.",
-      lignes: [
-        { m: "Espagnol", p: "Mme Chevalier", h: 1.5, c: "langues" },
-        { m: "Anglais", p: "Mme Blanc", h: 1.5, c: "langues" },
-        { m: "ETLV espagnol", p: "Mme Chevalier", h: 1, c: "langues" },
-        { m: "ETLV anglais", p: "Mme Blanc", h: 1, c: "langues" },
-        { m: "ETLV BPH espagnol", p: "M. Gauthier", h: 1, c: "langues" },
-        { m: "ETLV STSS anglais", p: "Mme Faure", h: 1, c: "langues" }
+      "titre": "Langues vivantes",
+      "lignes": [
+        {
+          "m": "Anglais",
+          "p": "Mme Shakespeare",
+          "h": 3,
+          "c": "langues"
+        },
+        {
+          "m": "Espagnol",
+          "p": "Mme Tapas",
+          "h": 2.5,
+          "c": "langues"
+        }
       ]
     },
     {
-      titre: "Accompagnement et vie de classe",
-      note: "Accompagnement du mardi 13h35 : un seul des trois groupes.",
-      lignes: [
-        { m: "Acc. perso. physique-chimie", p: "M. Bonnet", h: 1, c: "accomp" },
-        { m: "Acc. perso. mathématiques", p: "Mme Morel", h: 1, c: "accomp" },
-        { m: "Acc. perso. français", p: "M. Henry", h: 1, c: "accomp" },
-        { m: "Anglais littérature 1+T", p: "Mme Robin", h: 1, c: "accomp" },
-        { m: "Devoir surveillé", p: "", h: 1, c: "accomp" },
-        { m: "Vie de classe", p: "Mme Morel", h: 0.5, c: "accomp" }
-      ]
+      "titre": "Arts, accompagnement et vie de classe",
+      "lignes": [
+        {
+          "m": "Arts plastiques",
+          "p": "Mme Gouache",
+          "h": 1,
+          "c": "arts"
+        },
+        {
+          "m": "Éducation musicale",
+          "p": "M. Solfège",
+          "h": 1,
+          "c": "arts"
+        },
+        {
+          "m": "Accompagnement personnalisé",
+          "p": "Mme Coup-de-Pouce",
+          "h": 1,
+          "c": "accomp"
+        },
+        {
+          "m": "Vie de classe",
+          "p": "M. Pythagore",
+          "h": 0.5,
+          "c": "accomp"
+        }
+      ],
+      "note": "Toutes les personnes et l'établissement de cette démo sont imaginaires."
     }
   ],
 
   semaines: {
     A: {
       Lundi: [
-        { gr: true, A: null, B: { m: "TP Physique-chimie", p: "M. Fontaine", s: "GLABO", c: "sciences" } },
-        { m: "Français", p: "Mme Roux", s: "G12", c: "lettres" },
-        { gr: true, span: 2,
-          A: { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" },
-          B: { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "GLABO", c: "bph" } },
-        "SUITE",
-        { gr: true, A: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" }, B: null },
-        { gr: true,
-          A: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" },
-          B: { m: "Français", p: "Mme Roux", s: "F08", c: "lettres" } },
-        { gr: true,
-          A: { m: "Français", p: "Mme Roux", s: "F08", c: "lettres" },
-          B: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" } },
-        { gr: true,
-          A: { m: "Mathématiques", p: "Mme Morel", s: "G02", c: "maths" },
-          B: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" } }
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"gr": true, "A": {"m": "SVT", "p": "Mme Darwin", "s": "Labo 1", "c": "bph"}, "B": {"m": "Technologie", "p": "M. Gadget", "s": "Atelier", "c": "stss"}},
+        {"gr": true, "A": {"m": "Technologie", "p": "M. Gadget", "s": "Atelier", "c": "stss"}, "B": {"m": "SVT", "p": "Mme Darwin", "s": "Labo 1", "c": "bph"}},
+        {"m": "Histoire-géographie", "p": "M. Vercingétorix", "s": "S12", "c": "hg"},
+        {"m": "Anglais", "p": "Mme Shakespeare", "s": "S07", "c": "langues"},
+        {"m": "EPS", "p": "M. Sprint", "s": "Gymnase", "c": "eps", "span": 2},
+        "SUITE"
       ],
       Mardi: [
-        { gr: true,
-          A: { m: "TP Physique-chimie", p: "M. Fontaine", s: "GLABO", c: "sciences" },
-          B: { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" } },
-        { m: "Physique-chimie", p: "M. Fontaine", s: "G12", c: "sciences" },
-        { gr: true, span: 2,
-          A: { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "GLABO", c: "bph" },
-          B: { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" } },
-        "SUITE",
-        { m: "Accompagnement personnalisé", p: "", s: "", c: "accomp", n: "Maths (Mme Morel, G12) · Français (M. Henry, G01) · Anglais litt. (Mme Robin, G16) — garder le vôtre" },
-        { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" },
-        { m: "Devoir surveillé", p: "", s: "G12", c: "accomp" },
-        { m: "Devoir surveillé", p: "", s: "G12", c: "accomp" }
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"m": "Physique-chimie", "p": "M. Bunsen", "s": "Labo 2", "c": "sciences"},
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "Espagnol", "p": "Mme Tapas", "s": "S08", "c": "langues"},
+        {"m": "Arts plastiques", "p": "Mme Gouache", "s": "Atelier d'art", "c": "arts"},
+        {"m": "Éducation musicale", "p": "M. Solfège", "s": "Salle de musique", "c": "arts"},
+        {"m": "Anglais", "p": "Mme Shakespeare", "s": "S07", "c": "langues"},
+        null
       ],
       Mercredi: [
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "Histoire-géographie", "p": "M. Vercingétorix", "s": "S12", "c": "hg"},
+        {"m": "Anglais", "p": "Mme Shakespeare", "s": "S07", "c": "langues"},
         null,
-        { m: "Physique-chimie", p: "M. Fontaine", s: "G12", c: "sciences" },
-        { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" },
-        { m: "Histoire-géographie", p: "M. Mercier", s: "G12", c: "hg" },
-        { m: "Anglais", p: "Mme Blanc", s: "G12", c: "langues" },
         null,
         null,
         null
       ],
       Jeudi: [
-        { m: "Enseignement moral et civique", p: "M. Mercier", s: "G12", c: "hg" },
-        { m: "Histoire-géographie", p: "M. Mercier", s: "G12", c: "hg" },
-        { m: "Accompagnement perso. physique-chimie", p: "M. Bonnet", s: "G12", c: "accomp" },
-        null,
-        { m: "EPS", p: "M. Lambert", s: "Gymnase", c: "eps", span: 2 },
-        "SUITE",
-        { m: "ETLV", p: "M. Gauthier · Mme Chevalier · Mme Faure · Mme Blanc", s: "G12 / G02", c: "langues", n: "BPH espagnol · Espagnol · STSS anglais · Anglais" },
-        { m: "Espagnol", p: "Mme Chevalier", s: "G12", c: "langues" }
+        {"gr": true, "A": {"m": "TP Physique-chimie", "p": "M. Bunsen", "s": "Labo 2", "c": "sciences"}, "B": null},
+        {"gr": true, "A": null, "B": {"m": "TP Physique-chimie", "p": "M. Bunsen", "s": "Labo 2", "c": "sciences"}},
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"m": "Enseignement moral et civique", "p": "M. Vercingétorix", "s": "S12", "c": "hg"},
+        {"m": "Espagnol", "p": "Mme Tapas", "s": "S08", "c": "langues"},
+        {"m": "Accompagnement personnalisé", "p": "Mme Coup-de-Pouce", "s": "CDI", "c": "accomp", "n": "Méthodologie et aide aux devoirs"},
+        {"m": "Vie de classe", "p": "M. Pythagore", "s": "S12", "c": "accomp"}
       ],
       Vendredi: [
-        null,
-        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
-        { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss", span: 2 },
+        {"m": "Histoire-géographie", "p": "M. Vercingétorix", "s": "S12", "c": "hg"},
+        {"m": "SVT", "p": "Mme Darwin", "s": "Labo 1", "c": "bph"},
+        {"m": "Technologie", "p": "M. Gadget", "s": "Atelier", "c": "stss"},
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "EPS", "p": "M. Sprint", "s": "Gymnase", "c": "eps", "span": 2},
         "SUITE",
-        { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" },
-        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
-        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
         null
       ]
     },
 
     B: {
       Lundi: [
-        { gr: true, A: null, B: { m: "TP Physique-chimie", p: "M. Fontaine", s: "GLABO", c: "sciences" } },
-        { m: "Français", p: "Mme Roux", s: "G12", c: "lettres" },
-        { gr: true, span: 2,
-          A: { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" },
-          B: { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "GLABO", c: "bph" } },
-        "SUITE",
-        { gr: true, A: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" }, B: null },
-        { gr: true,
-          A: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" },
-          B: { m: "Français", p: "Mme Roux", s: "F08", c: "lettres" } },
-        { gr: true,
-          A: { m: "Français", p: "Mme Roux", s: "F08", c: "lettres" },
-          B: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" } },
-        { gr: true,
-          A: { m: "Mathématiques", p: "Mme Morel", s: "G02", c: "maths" },
-          B: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" } }
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"gr": true, "A": {"m": "SVT", "p": "Mme Darwin", "s": "Labo 1", "c": "bph"}, "B": {"m": "Technologie", "p": "M. Gadget", "s": "Atelier", "c": "stss"}},
+        {"gr": true, "A": {"m": "Technologie", "p": "M. Gadget", "s": "Atelier", "c": "stss"}, "B": {"m": "SVT", "p": "Mme Darwin", "s": "Labo 1", "c": "bph"}},
+        {"m": "Histoire-géographie", "p": "M. Vercingétorix", "s": "S12", "c": "hg"},
+        {"m": "Anglais", "p": "Mme Shakespeare", "s": "S07", "c": "langues"},
+        {"m": "EPS", "p": "M. Sprint", "s": "Gymnase", "c": "eps", "span": 2},
+        "SUITE"
       ],
       Mardi: [
-        { gr: true,
-          A: { m: "TP Physique-chimie", p: "M. Fontaine", s: "GLABO", c: "sciences" },
-          B: { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" } },
-        { m: "Physique-chimie", p: "M. Fontaine", s: "G12", c: "sciences" },
-        { gr: true, span: 2,
-          A: { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "GLABO", c: "bph" },
-          B: { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" } },
-        "SUITE",
-        { m: "Accompagnement personnalisé", p: "", s: "", c: "accomp", n: "Maths (Mme Morel, G12) · Français (M. Henry, G01) · Anglais litt. (Mme Robin, G16) — garder le vôtre" },
-        { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" },
-        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
-        { m: "Vie de classe", p: "Mme Morel", s: "G12", c: "accomp" }
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"m": "Physique-chimie", "p": "M. Bunsen", "s": "Labo 2", "c": "sciences"},
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "Espagnol", "p": "Mme Tapas", "s": "S08", "c": "langues"},
+        {"m": "Arts plastiques", "p": "Mme Gouache", "s": "Atelier d'art", "c": "arts"},
+        {"m": "Éducation musicale", "p": "M. Solfège", "s": "Salle de musique", "c": "arts"},
+        {"m": "Devoir surveillé", "p": "", "s": "S12", "c": "accomp"},
+        {"m": "Devoir surveillé", "p": "", "s": "S12", "c": "accomp"}
       ],
       Mercredi: [
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "Histoire-géographie", "p": "M. Vercingétorix", "s": "S12", "c": "hg"},
+        {"m": "Anglais", "p": "Mme Shakespeare", "s": "S07", "c": "langues"},
         null,
-        { m: "Physique-chimie", p: "M. Fontaine", s: "G12", c: "sciences" },
-        { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" },
-        { m: "Histoire-géographie", p: "M. Mercier", s: "G12", c: "hg" },
-        { m: "Anglais", p: "Mme Blanc", s: "G12", c: "langues" },
         null,
         null,
         null
       ],
       Jeudi: [
-        { m: "Français", p: "Mme Roux", s: "G12", c: "lettres" },
-        { m: "Français", p: "Mme Roux", s: "G12", c: "lettres" },
-        { m: "Espagnol", p: "Mme Chevalier", s: "G12", c: "langues" },
-        { m: "Accompagnement perso. physique-chimie", p: "M. Bonnet", s: "G12", c: "accomp" },
-        { m: "EPS", p: "M. Lambert", s: "Gymnase", c: "eps", span: 2 },
-        "SUITE",
-        { m: "ETLV", p: "M. Gauthier · Mme Chevalier · Mme Faure · Mme Blanc", s: "G12 / G02", c: "langues", n: "BPH espagnol · Espagnol · STSS anglais · Anglais" },
-        { m: "Anglais", p: "Mme Blanc", s: "G12", c: "langues" }
+        {"gr": true, "A": {"m": "TP Physique-chimie", "p": "M. Bunsen", "s": "Labo 2", "c": "sciences"}, "B": null},
+        {"gr": true, "A": null, "B": {"m": "TP Physique-chimie", "p": "M. Bunsen", "s": "Labo 2", "c": "sciences"}},
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"m": "Enseignement moral et civique", "p": "M. Vercingétorix", "s": "S12", "c": "hg"},
+        {"m": "Espagnol", "p": "Mme Tapas", "s": "S08", "c": "langues"},
+        {"m": "Accompagnement personnalisé", "p": "Mme Coup-de-Pouce", "s": "CDI", "c": "accomp", "n": "Méthodologie et aide aux devoirs"},
+        {"m": "Éducation musicale", "p": "M. Solfège", "s": "Salle de musique", "c": "arts"}
       ],
       Vendredi: [
-        null,
-        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
-        { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss", span: 2 },
+        {"m": "Histoire-géographie", "p": "M. Vercingétorix", "s": "S12", "c": "hg"},
+        {"m": "SVT", "p": "Mme Darwin", "s": "Labo 1", "c": "bph"},
+        {"m": "Technologie", "p": "M. Gadget", "s": "Atelier", "c": "stss"},
+        {"m": "Mathématiques", "p": "M. Pythagore", "s": "S12", "c": "maths"},
+        {"m": "Français", "p": "Mme Bescherelle", "s": "S12", "c": "lettres"},
+        {"m": "EPS", "p": "M. Sprint", "s": "Gymnase", "c": "eps", "span": 2},
         "SUITE",
-        { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" },
-        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
-        { m: "Espagnol", p: "Mme Chevalier", s: "G12", c: "langues" },
-        null
+        {"m": "Anglais", "p": "Mme Shakespeare", "s": "S07", "c": "langues"}
       ]
     }
   }
