@@ -1,0 +1,249 @@
+/* Emploi du temps 1re ST2S (démonstration) — données
+   Ce fichier est le seul endroit à modifier pour corriger le contenu.
+   Le bouton « Enregistrer » de la page régénère ce fichier : il suffit de le
+   remplacer dans le dépôt pour publier les corrections.
+
+   Une case peut prendre trois formes :
+     null                          → créneau libre
+     "SUITE"                       → occupée par le cours de la case du dessus
+     { m, p, s, c, span, n }       → cours pour la classe entière
+     { gr: true, span, A: …, B: … }→ cours dédoublé : une version par groupe,
+                                     chaque version étant un objet { m, p, s, c, n }
+                                     ou null si le groupe n'a pas cours.
+
+   m = matière · p = professeur · s = salle · c = famille (couleur)
+   span = nombre de créneaux occupés · n = note libre
+   Familles : stss, bph, sciences, maths, lettres, hg, langues, eps, accomp
+*/
+
+window.EDT_DATA = {
+  meta: {
+    etablissement: "Lycée des Tilleuls — démo",
+    classe: "1ST2S1",
+    profPrincipal: "Mme MOREL",
+    groupe: "Groupe A",
+    maj: "Rentrée 2026"
+  },
+
+  creneaux: [
+    ["08h15", "09h10"],
+    ["09h10", "10h05"],
+    ["10h25", "11h20"],
+    ["11h20", "12h15"],
+    ["13h35", "14h30"],
+    ["14h30", "15h25"],
+    ["15h40", "16h35"],
+    ["16h35", "17h30"]
+  ],
+
+  jours: ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
+
+  pause: { debut: "12h15", fin: "13h35", libelle: "Pause méridienne" },
+
+  // Calendrier officiel zone A — académie de Bordeaux, année 2026-2027.
+  // « debut » et « fin » sont les premier et dernier jours sans cours.
+  calendrier: {
+    zone: "Zone A — académie de Bordeaux",
+    rentree: "2026-09-01",
+    finAnnee: "2027-07-02",
+    vacances: [
+      { nom: "Vacances de la Toussaint", debut: "2026-10-17", fin: "2026-11-01" },
+      { nom: "Vacances de Noël", debut: "2026-12-19", fin: "2027-01-03" },
+      { nom: "Vacances d’hiver", debut: "2027-02-13", fin: "2027-02-28" },
+      { nom: "Vacances de printemps", debut: "2027-04-10", fin: "2027-04-25" },
+      { nom: "Pont de l’Ascension", debut: "2027-05-06", fin: "2027-05-09" },
+      { nom: "Vacances d’été", debut: "2027-07-03", fin: "2027-08-31" }
+    ],
+    feries: [
+      { nom: "Armistice 1918", date: "2026-11-11" },
+      { nom: "Lundi de Pâques", date: "2027-03-29" },
+      { nom: "Lundi de Pentecôte", date: "2027-05-17" }
+    ]
+  },
+
+  // Affaires à prévoir, par matière. Modifiable depuis le bouton « Affaires ».
+  affaires: {
+    "EPS": ["Tenue de sport", "Baskets propres"],
+    "Bio. physiopatho. hum.": ["Blouse"],
+    "TP Physique-chimie": ["Blouse", "Lunettes de protection"],
+    "Mathématiques": ["Calculatrice"],
+    "Devoir surveillé": ["Copies doubles"]
+  },
+
+  // Changements ponctuels, par date : { slot, type: "annule" | "remplace" | "ajout", … }
+  exceptions: {},
+
+  recap: [
+    {
+      titre: "Enseignements",
+      lignes: [
+        { m: "Bio. physiopathologie humaine", p: "M. Garnier", h: 7, c: "bph" },
+        { m: "STSS", p: "Mme Lefèvre", h: 6, c: "stss" },
+        { m: "STSS", p: "Mme Perrin", h: 5, c: "stss" },
+        { m: "Physique-chimie", p: "M. Fontaine", h: 4, c: "sciences" },
+        { m: "Mathématiques", p: "Mme Morel", h: 4, c: "maths" },
+        { m: "Français", p: "Mme Roux", h: 4, c: "lettres" },
+        { m: "EPS", p: "M. Lambert", h: 2, c: "eps" },
+        { m: "Histoire-géographie", p: "M. Mercier", h: 1.5, c: "hg" },
+        { m: "Enseignement moral et civique", p: "M. Mercier", h: 0.5, c: "hg" }
+      ],
+      note: "Volumes de la classe entière : STSS, biologie et physique-chimie se partagent entre les deux groupes."
+    },
+    {
+      titre: "Langues vivantes",
+      note: "ETLV : un seul des quatre groupes vous concerne.",
+      lignes: [
+        { m: "Espagnol", p: "Mme Chevalier", h: 1.5, c: "langues" },
+        { m: "Anglais", p: "Mme Blanc", h: 1.5, c: "langues" },
+        { m: "ETLV espagnol", p: "Mme Chevalier", h: 1, c: "langues" },
+        { m: "ETLV anglais", p: "Mme Blanc", h: 1, c: "langues" },
+        { m: "ETLV BPH espagnol", p: "M. Gauthier", h: 1, c: "langues" },
+        { m: "ETLV STSS anglais", p: "Mme Faure", h: 1, c: "langues" }
+      ]
+    },
+    {
+      titre: "Accompagnement et vie de classe",
+      note: "Accompagnement du mardi 13h35 : un seul des trois groupes.",
+      lignes: [
+        { m: "Acc. perso. physique-chimie", p: "M. Bonnet", h: 1, c: "accomp" },
+        { m: "Acc. perso. mathématiques", p: "Mme Morel", h: 1, c: "accomp" },
+        { m: "Acc. perso. français", p: "M. Henry", h: 1, c: "accomp" },
+        { m: "Anglais littérature 1+T", p: "Mme Robin", h: 1, c: "accomp" },
+        { m: "Devoir surveillé", p: "", h: 1, c: "accomp" },
+        { m: "Vie de classe", p: "Mme Morel", h: 0.5, c: "accomp" }
+      ]
+    }
+  ],
+
+  semaines: {
+    A: {
+      Lundi: [
+        { gr: true, A: null, B: { m: "TP Physique-chimie", p: "M. Fontaine", s: "GLABO", c: "sciences" } },
+        { m: "Français", p: "Mme Roux", s: "G12", c: "lettres" },
+        { gr: true, span: 2,
+          A: { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" },
+          B: { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "GLABO", c: "bph" } },
+        "SUITE",
+        { gr: true, A: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" }, B: null },
+        { gr: true,
+          A: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" },
+          B: { m: "Français", p: "Mme Roux", s: "F08", c: "lettres" } },
+        { gr: true,
+          A: { m: "Français", p: "Mme Roux", s: "F08", c: "lettres" },
+          B: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" } },
+        { gr: true,
+          A: { m: "Mathématiques", p: "Mme Morel", s: "G02", c: "maths" },
+          B: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" } }
+      ],
+      Mardi: [
+        { gr: true,
+          A: { m: "TP Physique-chimie", p: "M. Fontaine", s: "GLABO", c: "sciences" },
+          B: { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" } },
+        { m: "Physique-chimie", p: "M. Fontaine", s: "G12", c: "sciences" },
+        { gr: true, span: 2,
+          A: { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "GLABO", c: "bph" },
+          B: { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" } },
+        "SUITE",
+        { m: "Accompagnement personnalisé", p: "", s: "", c: "accomp", n: "Maths (Mme Morel, G12) · Français (M. Henry, G01) · Anglais litt. (Mme Robin, G16) — garder le vôtre" },
+        { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" },
+        { m: "Devoir surveillé", p: "", s: "G12", c: "accomp" },
+        { m: "Devoir surveillé", p: "", s: "G12", c: "accomp" }
+      ],
+      Mercredi: [
+        null,
+        { m: "Physique-chimie", p: "M. Fontaine", s: "G12", c: "sciences" },
+        { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" },
+        { m: "Histoire-géographie", p: "M. Mercier", s: "G12", c: "hg" },
+        { m: "Anglais", p: "Mme Blanc", s: "G12", c: "langues" },
+        null,
+        null,
+        null
+      ],
+      Jeudi: [
+        { m: "Enseignement moral et civique", p: "M. Mercier", s: "G12", c: "hg" },
+        { m: "Histoire-géographie", p: "M. Mercier", s: "G12", c: "hg" },
+        { m: "Accompagnement perso. physique-chimie", p: "M. Bonnet", s: "G12", c: "accomp" },
+        null,
+        { m: "EPS", p: "M. Lambert", s: "Gymnase", c: "eps", span: 2 },
+        "SUITE",
+        { m: "ETLV", p: "M. Gauthier · Mme Chevalier · Mme Faure · Mme Blanc", s: "G12 / G02", c: "langues", n: "BPH espagnol · Espagnol · STSS anglais · Anglais" },
+        { m: "Espagnol", p: "Mme Chevalier", s: "G12", c: "langues" }
+      ],
+      Vendredi: [
+        null,
+        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
+        { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss", span: 2 },
+        "SUITE",
+        { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" },
+        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
+        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
+        null
+      ]
+    },
+
+    B: {
+      Lundi: [
+        { gr: true, A: null, B: { m: "TP Physique-chimie", p: "M. Fontaine", s: "GLABO", c: "sciences" } },
+        { m: "Français", p: "Mme Roux", s: "G12", c: "lettres" },
+        { gr: true, span: 2,
+          A: { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" },
+          B: { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "GLABO", c: "bph" } },
+        "SUITE",
+        { gr: true, A: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" }, B: null },
+        { gr: true,
+          A: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" },
+          B: { m: "Français", p: "Mme Roux", s: "F08", c: "lettres" } },
+        { gr: true,
+          A: { m: "Français", p: "Mme Roux", s: "F08", c: "lettres" },
+          B: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" } },
+        { gr: true,
+          A: { m: "Mathématiques", p: "Mme Morel", s: "G02", c: "maths" },
+          B: { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss" } }
+      ],
+      Mardi: [
+        { gr: true,
+          A: { m: "TP Physique-chimie", p: "M. Fontaine", s: "GLABO", c: "sciences" },
+          B: { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" } },
+        { m: "Physique-chimie", p: "M. Fontaine", s: "G12", c: "sciences" },
+        { gr: true, span: 2,
+          A: { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "GLABO", c: "bph" },
+          B: { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" } },
+        "SUITE",
+        { m: "Accompagnement personnalisé", p: "", s: "", c: "accomp", n: "Maths (Mme Morel, G12) · Français (M. Henry, G01) · Anglais litt. (Mme Robin, G16) — garder le vôtre" },
+        { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" },
+        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
+        { m: "Vie de classe", p: "Mme Morel", s: "G12", c: "accomp" }
+      ],
+      Mercredi: [
+        null,
+        { m: "Physique-chimie", p: "M. Fontaine", s: "G12", c: "sciences" },
+        { m: "STSS", p: "Mme Perrin", s: "G12", c: "stss" },
+        { m: "Histoire-géographie", p: "M. Mercier", s: "G12", c: "hg" },
+        { m: "Anglais", p: "Mme Blanc", s: "G12", c: "langues" },
+        null,
+        null,
+        null
+      ],
+      Jeudi: [
+        { m: "Français", p: "Mme Roux", s: "G12", c: "lettres" },
+        { m: "Français", p: "Mme Roux", s: "G12", c: "lettres" },
+        { m: "Espagnol", p: "Mme Chevalier", s: "G12", c: "langues" },
+        { m: "Accompagnement perso. physique-chimie", p: "M. Bonnet", s: "G12", c: "accomp" },
+        { m: "EPS", p: "M. Lambert", s: "Gymnase", c: "eps", span: 2 },
+        "SUITE",
+        { m: "ETLV", p: "M. Gauthier · Mme Chevalier · Mme Faure · Mme Blanc", s: "G12 / G02", c: "langues", n: "BPH espagnol · Espagnol · STSS anglais · Anglais" },
+        { m: "Anglais", p: "Mme Blanc", s: "G12", c: "langues" }
+      ],
+      Vendredi: [
+        null,
+        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
+        { m: "STSS", p: "Mme Lefèvre", s: "G12", c: "stss", span: 2 },
+        "SUITE",
+        { m: "Mathématiques", p: "Mme Morel", s: "G12", c: "maths" },
+        { m: "Bio. physiopatho. hum.", p: "M. Garnier", s: "G12", c: "bph" },
+        { m: "Espagnol", p: "Mme Chevalier", s: "G12", c: "langues" },
+        null
+      ]
+    }
+  }
+};
